@@ -6,7 +6,7 @@
 /*   By: jsala <jacopo.sala@student.barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 14:46:53 by jsala             #+#    #+#             */
-/*   Updated: 2024/01/06 16:54:31 by jsala            ###   ########.fr       */
+/*   Updated: 2024/01/07 16:00:31 by jsala            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,18 @@ int	main(int argc, char **argv)
 	while (++c < argc)
 	{
 		printf("Test #%d starting:\n", c);
+		printf("Test file name: %s\n", argv[c]);;
 		fd = open(argv[c], O_RDONLY);
-		printf("%s", get_next_line(fd));
 		if (fd < 0)
+		{
+			printf("fd failed");
 			return (1);
+		}
+		printf("%i\n", fd);
+		printf("%s\n", get_next_line(fd));
+		printf("%s\n", get_next_line(fd));
+		printf("%s\n", get_next_line(fd));
+		close(fd);
 	}
 	return (0);
 }

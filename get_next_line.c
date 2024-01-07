@@ -6,23 +6,60 @@
 /*   By: jsala <jacopo.sala@student.barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 11:44:21 by jsala             #+#    #+#             */
-/*   Updated: 2024/01/06 17:13:32 by jsala            ###   ########.fr       */
+/*   Updated: 2024/01/07 16:00:52 by jsala            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+#include <stdio.h>
 
-char	*ft_get_line(char **text)
+char	*ft_update_text(char *text)
+{	
+	char	*str;
+	int		l_line;
+	int		i;
+
+	l_line = 0;
+	while (text[l_line] && text[l_line] != '\n')
+		l_line++;
+	printf("L_line is %i", l_line);
+	if (!text[l_line])
+		return (NULL);
+	str = malloc(sizeof(char) * (ft_strlen(text) - l_line + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	l_line++;
+	while (text[l_line])
+		str[i++] = text[l_line++];
+	str[i] = '\0';
+	free(text);
+	return (str);
+}
+
+char	*ft_get_line(char *text)
 {
 	char	*str;
 	int		l_line;
+	int		i;
 
+	if (!text)
+		return (NULL);
 	l_line = 0;
-	while (*text[l_line] && *text[l_line] != '\n')
+	while (text[l_line] && text[l_line] != '\n')
 		l_line++;
-	str = malloc(sizeof(char) * (l_line + 2));
-	while (l_line-- >= 0)
-		*(str++) = **(text++);
+	str = (char *) malloc(sizeof(char) * (l_line + 2));
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (text[i] && text[i] != '\n')
+	{
+		str[i] = text[i];
+		i++;
+	}
+	if (text[i] == '\n')
+		str[i++] = '\n';
+	str[i] = '\0';
 	return (str);
 }
 
@@ -33,31 +70,27 @@ char	*get_next_line(int fd)
 	char		*line;
 	int			bytes_read;
 
-	if (fd < 0 || BUFF_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
-	if (!text)
-	{
-		text = malloc(sizeof(char) * 1);
-		if (!text)
-			return (NULL);
-		*text = '\0';
-	}
-	buff = malloc(sizeof(char) * (BUFF_SIZE + 1));
+	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
 		return (NULL);
 	bytes_read = 1;
-	while (ft_strEOL(text) && bytes_read)
+	while (!ft_strchr(text, '\n') && bytes_read)
 	{
-		bytes_read = read(fd, buff, BUFF_SIZE);
-		if (bytes_read <= 0)
+		bytes_read = read(fd, buff, BUFFER_SIZE);
+		if (bytes_read < 0)
 		{
 			free(buff);
 			return (NULL);
 		}
-		buff[BUFF_SIZE + 1] = '\0';
+		buff[BUFFER_SIZE] = '\0';
 		text = ft_strjoin(text, buff);
+		if (!text)
+			return (NULL);
 	}
-	line = ft_get_line(&text);
 	free(buff);
+	line = ft_get_line(text);
+	text = ft_update_text(text);
 	return (line);
 }

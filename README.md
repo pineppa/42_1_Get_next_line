@@ -37,12 +37,12 @@ char *get_next_line(int fd);
 
 ### Step 2 - Variables definition
 
-* `char *buffer`: sized based on `BUFF_SIZE` defined in the header file, defines the size of the reading;
+* `char *buffer`: sized based on `BUFFER_SIZE` defined in the header file, defines the size of the reading;
 * `static char *line`: pointer to the begin of the line;
 
 ### Step 3 - Read the input file in buffer
 
-The reading will only get `BUFF_SIZE` characters, therefore:
+The reading will only get `BUFFER_SIZE` characters, therefore:
 
 * **Option 1**: The buffer is empty -> Return NULL
 * **Option 2**: The buffer does not contain EOL nor EOF signals -> repeatthe cyle;

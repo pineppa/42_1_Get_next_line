@@ -6,56 +6,62 @@
 /*   By: jsala <jacopo.sala@student.barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 14:12:46 by jsala             #+#    #+#             */
-/*   Updated: 2024/01/06 17:12:51 by jsala            ###   ########.fr       */
+/*   Updated: 2024/01/07 16:07:02 by jsala            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-unsigned int	ft_strlen(const char *s)
+int	ft_strlen(char *s)
 {
-	unsigned int	c;
+	int	c;
 
 	c = 0;
+	if (!s)
+		return (0);
 	while (s[c])
 		c++;
 	return (c);
 }
 
-int	ft_strEOL(const char *s)
+int ft_strchr(char *str, int c)
 {
 	int	i;
 
-	i = 0;
-	while (s[i])
+	if (!str || !c)
+		return (0);
+	i = -1;
+	while (str[++i])
 	{
-		if (s[i] == '\n')
+		if (str[i] == (char) c)
 			return (1);
-		i++;
 	}
 	return (0);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
 {
-	int		len1;
-	int		len2;
-	char	*str;
 	int		i;
+	int		j;
+	char	*str;
 
-	if (s1 || s2)
+	if (!s1)
+	{
+		s1 = malloc(1 * sizeof(char));
+		s1[0] = '\0';
+	}
+	if (!s1 || !s2)
 		return (NULL);
-	len1 = ft_strlen(s1);
-	len2 = ft_strlen(s2);
-	str = malloc(sizeof(char) * (len1 + len2 + 1));
-	if (!str)
+	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (str == NULL)
 		return (NULL);
 	i = -1;
-	while (++i < len1)
-		str[i] = s1[i];
-	i = -1;
-	while (++i < len2)
-		str[len1 + i] = s2[i];
-	str[len1 + i] = 0;
+	j = 0;
+	if (s1)
+		while (s1[++i] != '\0')
+			str[i] = s1[i];
+	while (s2[j] != '\0')
+		str[i++] = s2[j++];
+	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
 	return (str);
 }
