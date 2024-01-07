@@ -6,12 +6,11 @@
 /*   By: jsala <jacopo.sala@student.barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 11:44:21 by jsala             #+#    #+#             */
-/*   Updated: 2024/01/07 16:00:52 by jsala            ###   ########.fr       */
+/*   Updated: 2024/01/07 17:24:10 by jsala            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
-#include <stdio.h>
 
 char	*ft_update_text(char *text)
 {	
@@ -22,7 +21,6 @@ char	*ft_update_text(char *text)
 	l_line = 0;
 	while (text[l_line] && text[l_line] != '\n')
 		l_line++;
-	printf("L_line is %i", l_line);
 	if (!text[l_line])
 		return (NULL);
 	str = malloc(sizeof(char) * (ft_strlen(text) - l_line + 1));
@@ -70,7 +68,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	int			bytes_read;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd <= 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 		return (NULL);
 	buff = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buff)
