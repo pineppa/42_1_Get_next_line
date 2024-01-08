@@ -101,3 +101,17 @@ As a general strategy:
   * The first part copies the beginning of `string`;
   * The second part copies the ending part of `string` returning a new `str` with a new memory allocated;
   * A third process is used to free `string`;
+
+
+#### Bonus: Handling more file descriptors
+
+In order to be able to keep a storage of all the arrays already checked, the function must be supplied with an array of array (pointers) to the different file descriptors previously passed to the function. Risky pitfalls:
+
+* Malloc cannot be used to allocate the array of arrays -> Dynamic allocation only happens at runtime, while the static variable is inizialised at compile time;
+* The initial array will have a fixed size. This should ideally allow each `fd` to be saved in memory, although the maximum value may change through different OS; Nice explaination in [stackoverflow](https://stackoverflow.com/questions/35442414/dynamic-vs-static-array-in-c)
+* To check on the same PC what are the limitations for file descriptors `fd` run in the terminal `ulimit -Sn` for the soft limit and `ulimit -Hn` for the hard limit;
+
+<br> :question: Unanswered questions:
+
+* If a file is closed outside the function, how can the function know about it? Will this mantain the previous information or will fd know it is now different ??
+* Is the value given by ulimit -Sn allowing the value 2^n or is only up to 2^(n-1) since 0 is also allowed?

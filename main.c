@@ -6,7 +6,7 @@
 /*   By: jsala <jacopo.sala@student.barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 14:46:53 by jsala             #+#    #+#             */
-/*   Updated: 2024/01/07 16:00:31 by jsala            ###   ########.fr       */
+/*   Updated: 2024/01/08 11:02:26 by jsala            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ int	main(int argc, char **argv)
 			return (1);
 		}
 		printf("%i\n", fd);
-		printf("%s\n", get_next_line(fd));
 		printf("%s\n", get_next_line(fd));
 		printf("%s\n", get_next_line(fd));
 		close(fd);
