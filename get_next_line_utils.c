@@ -6,7 +6,7 @@
 /*   By: jsala <jacopo.sala@student.barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 14:12:46 by jsala             #+#    #+#             */
-/*   Updated: 2024/01/07 16:07:02 by jsala            ###   ########.fr       */
+/*   Updated: 2024/01/16 20:33:04 by jsala            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	ft_strlen(char *s)
 	return (c);
 }
 
-int ft_strchr(char *str, int c)
+int	ft_strchr(char *str, int c)
 {
 	int	i;
 
@@ -45,23 +45,25 @@ char	*ft_strjoin(char *s1, char *s2)
 	int		j;
 	char	*str;
 
+	if (!s2)
+		return (NULL);
 	if (!s1)
 	{
-		s1 = malloc(1 * sizeof(char));
+		s1 = malloc(sizeof(char) * 1);
+		if (!s1)
+			return (NULL);
 		s1[0] = '\0';
 	}
-	if (!s1 || !s2)
-		return (NULL);
 	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (str == NULL)
 		return (NULL);
 	i = -1;
+	while (s1[++i])
+		str[i] = s1[i];
 	j = 0;
-	if (s1)
-		while (s1[++i] != '\0')
-			str[i] = s1[i];
-	while (s2[j] != '\0')
+	while (s2[j])
 		str[i++] = s2[j++];
-	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	str[i] = '\0';
+	free(s1);
 	return (str);
 }

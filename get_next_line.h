@@ -6,16 +6,16 @@
 /*   By: jsala <jacopo.sala@student.barcelona.co    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 14:19:33 by jsala             #+#    #+#             */
-/*   Updated: 2024/01/07 15:16:46 by jsala            ###   ########.fr       */
+/*   Updated: 2024/01/16 20:45:57 by jsala            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 8192
-#endif
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 8192
+# endif
 
 # include <stdlib.h>
 # include <unistd.h>
