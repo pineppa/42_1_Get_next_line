@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsala <jacopo.sala@student.barcelona.co    +#+  +:+       +#+        */
+/*   By: jsala <jsala@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 14:12:46 by jsala             #+#    #+#             */
-/*   Updated: 2024/01/16 20:33:04 by jsala            ###   ########.fr       */
+/*   Updated: 2024/02/12 14:59:58 by jsala            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,31 +39,31 @@ int	ft_strchr(char *str, int c)
 	return (0);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *text, char *buff)
 {
 	int		i;
 	int		j;
 	char	*str;
 
-	if (!s2)
+	if (!buff)
 		return (NULL);
-	if (!s1)
+	if (!text)
 	{
-		s1 = malloc(sizeof(char) * 1);
-		if (!s1)
+		text = malloc(sizeof(char) * 1);
+		if (!text)
 			return (NULL);
-		s1[0] = '\0';
+		text[0] = '\0';
 	}
-	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	str = malloc((ft_strlen(text) + ft_strlen(buff) + 1) * sizeof(char));
 	if (str == NULL)
 		return (NULL);
 	i = -1;
-	while (s1[++i])
-		str[i] = s1[i];
+	while (text[++i])
+		str[i] = text[i];
 	j = 0;
-	while (s2[j])
-		str[i++] = s2[j++];
+	while (buff[j])
+		str[i++] = buff[j++];
 	str[i] = '\0';
-	free(s1);
+	free(text);
 	return (str);
 }

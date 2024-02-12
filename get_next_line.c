@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsala <jacopo.sala@student.barcelona.co    +#+  +:+       +#+        */
+/*   By: jsala <jsala@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 11:44:21 by jsala             #+#    #+#             */
-/*   Updated: 2024/01/16 20:46:59 by jsala            ###   ########.fr       */
+/*   Updated: 2024/02/12 15:00:05 by jsala            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ char	*ft_get_line(char *text)
 	i = 0;
 	while (text[i] && text[i] != '\n')
 		i++;
-	str = (char *) malloc(sizeof(char) * (i + 2));
+	if (!text[i])
+		str = (char *) malloc(sizeof(char) * (i + 1));
+	else
+		str = (char *) malloc(sizeof(char) * (i + 2));
 	if (!str)
 		return (NULL);
 	i = 0;
@@ -80,6 +83,7 @@ char	*read_and_join(int fd, char *text)
 		if (bytes_read < 0)
 		{
 			free(buff);
+			free(text);
 			return (NULL);
 		}
 		buff[bytes_read] = '\0';
@@ -94,16 +98,21 @@ char	*get_next_line(int fd)
 	static char	*text;
 	char		*line;
 
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (NULL);
 	text = read_and_join(fd, text);
 	if (!text)
 	{
 		free(text);
-		close(fd);
+		text = NULL;
 		return (NULL);
 	}
 	line = ft_get_line(text);
+	if (!line)
+	{
+		free(text);
+		text = NULL;
+	}
 	text = ft_update_text(text);
 	return (line);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils_bonus.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsala <jacopo.sala@student.barcelona.co    +#+  +:+       +#+        */
+/*   By: jsala <jsala@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 14:12:46 by jsala             #+#    #+#             */
-/*   Updated: 2024/01/16 20:46:29 by jsala            ###   ########.fr       */
+/*   Updated: 2024/02/12 15:01:42 by jsala            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jsala <jacopo.sala@student.barcelona.co    +#+  +:+       +#+        */
+/*   By: jsala <jsala@student.42barcelona.com>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/06 11:44:21 by jsala             #+#    #+#             */
-/*   Updated: 2024/01/16 20:56:42 by jsala            ###   ########.fr       */
+/*   Updated: 2024/02/12 15:01:32 by jsala            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,16 +91,15 @@ char	*read_and_join(int fd, char *text)
 
 char	*get_next_line(int fd)
 {
-	static char	*text[256];
+	static char	*text[OPEN_MAX];
 	char		*line;
 
-	if (fd < 0 || fd > 255 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (fd < 0 || fd > OPEN_MAX || BUFFER_SIZE <= 0)
 		return (NULL);
 	text[fd] = read_and_join(fd, text[fd]);
 	if (!text[fd])
 	{
 		free(text[fd]);
-		close(fd);
 		return (NULL);
 	}
 	line = ft_get_line(text[fd]);
